@@ -9,8 +9,12 @@ import java.util.Collection;
  * signature of the existing methods.
  */
 public class ChessPiece {
-
+    private ChessGame.TeamColor pieceColor;
+    private ChessPiece.PieceType type;
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
+            this.pieceColor = pieceColor;
+            this.type = type;
+        }
     }
 
     /**
@@ -22,21 +26,21 @@ public class ChessPiece {
         BISHOP,
         KNIGHT,
         ROOK,
-        PAWN
+        PAWN;
     }
 
     /**
      * @return Which team this chess piece belongs to
      */
     public ChessGame.TeamColor getTeamColor() {
-        throw new RuntimeException("Not implemented");
+        return this.pieceColor;
     }
 
     /**
      * @return which type of chess piece this piece is
      */
     public PieceType getPieceType() {
-        throw new RuntimeException("Not implemented");
+        return this.type;
     }
 
     /**
@@ -46,7 +50,32 @@ public class ChessPiece {
      *
      * @return Collection of valid moves
      */
+
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not implemented");
+        if (this.type == PieceType.BISHOP) {
+            Bishop bishop = new Bishop(this.pieceColor);
+            return bishop.pieceMoves(board, myPosition);
+        } else if (this.type == PieceType.KING) {
+            King king = new King(this.pieceColor);
+            return king.pieceMoves(board, myPosition);
+        } else if (this.type == PieceType.QUEEN) {
+            Queen queen = new Queen(this.pieceColor);
+        } else if (this.type == PieceType.KNIGHT) {
+            Knight knight = new Knight(this.pieceColor);
+            return knight.pieceMoves(board, myPosition);
+        } else if (this.type == PieceType.ROOK) {
+            Rook rook = new Rook(this.pieceColor);
+            return rook.pieceMoves(board, myPosition);
+        } else if (this.type == PieceType.PAWN) {
+            Pawn pawn = new Pawn(this.pieceColor);
+            return pawn.pieceMoves(board, myPosition);
+        } else {
+            throw new RuntimeException("Not implemented");
+        }
     }
-}
+
+        @Override
+        public String toString() {
+            return super.toString();
+        }
+    }
