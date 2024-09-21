@@ -8,9 +8,14 @@ package chess;
  */
 public class ChessBoard {
     private ChessPiece[][] squares = new ChessPiece[8][8];
-    public ChessBoard() {
-        
-    }
+
+    public ChessBoard(ChessBoard squares) {
+        this.squares = new ChessPiece[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                this.squares[i][j] = squares.squares[i][j] != null ? new ChessPiece(squares.squares[i][j].getTeamColor(), squares.squares[i][j].getPieceType()) : null;
+            }
+        }
 
     /**
      * Adds a chess piece to the chessboard
@@ -37,6 +42,9 @@ public class ChessBoard {
      * (How the game of chess normally starts)
      */
     public void resetBoard() {
-        throw new RuntimeException("Not implemented");
-    }
-}
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    squares[i][j] = null;
+                }
+            }
+        }
